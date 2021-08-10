@@ -33,16 +33,34 @@ public class Planner {
         }
     }
 
-//    public Planner find(int id) {
-//
-//    }
+    public List<Task> getTasks() {
+        try(Connection connection = DB.sql2o.open()) {
+            String sql = "SELECT * FROM tasks WHERE planner_id=:id";
+            return connection.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .executeAndFetch(Task.class);
+        }
+    }
 
-    public void update() {
-
+    public void update(String name, String email, String password) {
+        try(Connection connection = DB.sql2o.open()) {
+            String sql = "UPDATE planner SET name = :name, email = :email, password = :password WHERE id= :id;";
+            connection.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("email", email)
+                    .addParameter("password", password)
+                    .addParameter("id", this.id)
+                    .executeUpdate();
+        }
     }
 
     public void delete() {
-
+        String sql = "DELETE FROM planner WHERE id = :id";
+        try(Connection connection = DB.sql2o.open()) {
+            connection.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .executeUpdate();
+        }
     }
 
     public int getId() {

@@ -20,11 +20,12 @@ public class Task {
 
     public void save() {
         try (Connection connection = DB.sql2o.open()){
-            String sql = "INSERT INTO tasks(title, body, completion, planner_id) VALUES (:title, :body, now(), :planner_id);";
+            String sql = "INSERT INTO tasks(title, body, completion, planner_id) VALUES (:title, :body, :completion , :planner_id);";
             this.id = (int) connection.createQuery(sql, true)
                     .addParameter("title", this.title)
                     .addParameter("body", this.body)
                     .addParameter("planner_id", this.planner_id)
+                    .addParameter("completion", this.completion)
                     .executeUpdate()
                     .getKey();
         }
@@ -33,6 +34,28 @@ public class Task {
         String sql = "SELECT * FROM tasks;";
         try(Connection connection = DB.sql2o.open()) {
             return connection.createQuery(sql).executeAndFetch(Task.class);
+        }
+    }
+
+    public void update(String title, String body, Timestamp completion, int planner_id) {
+        try(Connection connection = DB.sql2o.open()) {
+            String sql = "UPDATE tasks SET title=:title, body=:body, completion:completion, planner_id=:planner_id WHERE id=:id;";
+            connection.createQuery(sql)
+                    .addParameter("title", title)
+                    .addParameter("body", body)
+                    .addParameter("completion", completion)
+                    .addParameter("planner_id", planner_id)
+                    .addParameter("id", this.id)
+                    .executeUpdate();
+        }
+    }
+
+    public void delete() {
+        try(Connection connection = DB.sql2o.open()) {
+            String sql = "DELETE FROM tasks WHERE id:id;";
+            connection.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .executeUpdate();
         }
     }
 
