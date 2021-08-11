@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PlannerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-10T14:10:57" hostname="Abdulfatahs-MacBook-Pro.local" time="0.129">
+<testsuite name="PlannerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-08-11T06:57:21" hostname="Abdulfatahs-MacBook-Pro.local" time="0.553">
   <properties/>
-  <testcase name="planner_updatePlannerData_name" classname="PlannerTest" time="0.129"/>
+  <testcase name="planner_savesAnotherPlannerToDB_true" classname="PlannerTest" time="0.316"/>
+  <testcase name="planner_deletePlanner_null" classname="PlannerTest" time="0.088"/>
+  <testcase name="planner_savesNewPlannerToDB_true" classname="PlannerTest" time="0.025"/>
+  <testcase name="planner_InstantiatesCorrectly_true" classname="PlannerTest" time="0.009"/>
+  <testcase name="planner_updatePlannerData_name" classname="PlannerTest" time="0.054"/>
+  <testcase name="planner_getAllTasksByAPlanner_tasks" classname="PlannerTest" time="0.059"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[log4j:WARN No appenders could be found for logger (org.sql2o.Query).
 log4j:WARN Please initialize the log4j system properly.

@@ -42,6 +42,15 @@ public class Planner {
         }
     }
 
+    public static Planner findByEmail(String email) {
+        try(Connection connection = DB.sql2o.open()) {
+            String sql = "SELECT * FROM planner WHERE email=:email;";
+            return connection.createQuery(sql)
+                    .addParameter("email", email)
+                    .executeAndFetchFirst(Planner.class);
+        }
+    }
+
     public void update(String name, String email, String password) {
         try(Connection connection = DB.sql2o.open()) {
             String sql = "UPDATE planner SET name = :name, email = :email, password = :password WHERE id= :id;";
